@@ -15,7 +15,7 @@ function Form() {
           </h1>
 
           <button className="flex items-center gap-2 !bg-blue-900  text-white px-5 py-3 rounded-xl shadow-lg transition">
-            
+                  
             Add Note
           </button>
         </div>
