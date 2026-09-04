@@ -1,10 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
 import { Search, Plus, Trash2, Edit3,  } from "lucide-react";
 import { Link } from 'react-router-dom';
-=======
-import { Search, Plus, Trash2, Edit3 } from "lucide-react";
->>>>>>> f260b80361d22d462eac15fedc49bb9a0fc3118c
 
 
 function Form() {
@@ -19,20 +15,14 @@ function Form() {
             📝 My Notes
           </h1>
 
-<<<<<<< HEAD
           <Link to={'/addNotes'}>
-=======
->>>>>>> f260b80361d22d462eac15fedc49bb9a0fc3118c
           <button className="flex items-center gap-2 !bg-blue-900  text-white px-5 py-3 rounded-xl shadow-lg transition">
                   
             Add Note
           </button>
-<<<<<<< HEAD
           </Link>
 
           
-=======
->>>>>>> f260b80361d22d462eac15fedc49bb9a0fc3118c
         </div>
 
         {/* Search */}
