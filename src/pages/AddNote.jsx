@@ -1,6 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 
 function AddNote() {
+
+  const [addNotesData, setAddNotesData]=useState({
+    NoteTitle:"",
+    Category:"",
+    Note:"",
+    Tags:""
+
+  })
+
   return (
    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
@@ -30,6 +40,8 @@ function AddNote() {
               className="w-full px-4 py-3 rounded-xl border border-gray-300 
               outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-500
               text-sm transition"
+              value={addNotesData.NoteTitle}
+              onChange={(e)=>setAddNotesData({...addNotesData,NoteTitle:e.target.value})}
             />
           </div>
 
@@ -43,6 +55,8 @@ function AddNote() {
               className="w-full px-4 py-3 rounded-xl border border-gray-300
               outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-500
               text-sm bg-white transition"
+               value={addNotesData.Category}
+              onChange={(e)=>setAddNotesData({...addNotesData,Category:e.target.value})}
             >
               <option value="">Select category</option>
               <option value="personal">Personal</option>
@@ -64,6 +78,8 @@ function AddNote() {
               className="w-full px-4 py-3 rounded-xl border border-gray-300
               outline-none resize-none focus:ring-2 focus:ring-black/10
               focus:border-gray-500 text-sm transition"
+               value={addNotesData.Note}
+              onChange={(e)=>setAddNotesData({...addNotesData,Note:e.target.value})}
             ></textarea>
           </div>
 
@@ -79,6 +95,8 @@ function AddNote() {
               className="w-full px-4 py-3 rounded-xl border border-gray-300
               outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-500
               text-sm transition"
+               value={addNotesData.Tags}
+              onChange={(e)=>setAddNotesData({...addNotesData,Tags:e.target.value})}
             />
           </div>
 
