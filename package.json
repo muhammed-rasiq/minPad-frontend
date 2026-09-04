@@ -14,7 +14,10 @@
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.4",
     "@tailwindcss/vite": "^4.3.3",
+<<<<<<< HEAD
     "axios": "^1.20.0",
+=======
+>>>>>>> f260b80361d22d462eac15fedc49bb9a0fc3118c
     "lucide-react": "^1.28.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
