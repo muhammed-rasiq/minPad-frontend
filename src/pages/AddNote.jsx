@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-
+import axios from 'axios'
 function AddNote() {
 
   const [addNotesData, setAddNotesData]=useState({
@@ -10,6 +10,33 @@ function AddNote() {
     Tags:""
 
   })
+
+  const handleAddNotes = async(e)=>{
+    e.preventDefault();
+
+    try {
+
+      if(!addNotesData.Note){
+        alert("Please add note")
+        return
+      }
+
+      const response = await axios.post('http://localhost:3000/api/addNotes',
+      addNotesData,
+)
+
+
+    console.log(response.data)
+      
+    } catch (error) {
+       console.log(error)
+
+    }
+
+    
+
+
+  }
 
   return (
    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
@@ -26,7 +53,7 @@ function AddNote() {
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form className="space-y-5"   onSubmit={handleAddNotes}>
           
           {/* Title */}
           <div>
@@ -114,6 +141,7 @@ function AddNote() {
               type="submit"
               className="px-6 py-3 rounded-xl bg-black text-white
               text-sm font-medium hover:bg-gray-800 transition"
+             
             >
               Add Note
             </button>
