@@ -9,6 +9,12 @@ import { useEffect } from 'react';
 function Form() {
 
   const [getAllNotes,setGetAllNotes]=useState([])
+  const [editNote,setEditNote]=useState({
+    NoteTitle,
+    Category,
+    Note,
+    Tags
+  })
 
   const handleGetAllNotes= async()=>{
 
@@ -16,6 +22,17 @@ function Form() {
       const response = await axios.get('http://localhost:3000/api/getAllNotes')
       setGetAllNotes(response.data)
       console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }
+
+  const handleEditNotes = async()=>{
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/updateNote',)
     } catch (error) {
       console.log(error)
     }
