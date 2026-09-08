@@ -1,9 +1,33 @@
 import React from 'react';
 import { Search, Plus, Trash2, Edit3,  } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 
 function Form() {
+
+  const [getAllNotes,setGetAllNotes]=useState([])
+
+  const handleGetAllNotes= async()=>{
+
+    try {
+      const response = await axios.get('http://localhost:3000/api/getAllNotes')
+      setGetAllNotes(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }
+
+  useEffect(()=>{
+    
+    handleGetAllNotes()
+  },[])
+
   return (
    <>
 
@@ -42,10 +66,16 @@ function Form() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
 
           {/* Card */}
-          <div className="bg-yellow-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition">
+         
+
+          {
+            getAllNotes.length>0?
+            getAllNotes.map((item)=>(
+
+               <div key={item._id} className="bg-yellow-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition">
             <div className="flex justify-between items-start">
               <h2 className="text-xl font-semibold">
-                React Learning
+               {item.NoteTitle}
               </h2>
 
               <div className="flex gap-2">
@@ -59,100 +89,23 @@ function Form() {
               </div>
             </div>
 
+             <p className="text-gray-700 mt-3 text-sm leading-6">
+             {item.Category}
+            </p>
+
             <p className="text-gray-700 mt-3 text-sm leading-6">
-              Learn Components, Props, State, Hooks,
-              React Router and Redux Toolkit.
+             {item.Note}
             </p>
 
             <p className="text-xs text-gray-500 mt-6">
-              30 July 2026
+              {item.Tags}
             </p>
           </div>
 
-          {/* Card */}
-          <div className="bg-green-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition">
-            <div className="flex justify-between items-start">
-              <h2 className="text-xl font-semibold">
-                Interview
-              </h2>
+            )):'no notes'
+          }
 
-              <div className="flex gap-2">
-                <button className="text-blue-600 hover:text-blue-800">
-                  <Edit3 size={18} />
-                </button>
-
-                <button className="text-red-500 hover:text-red-700">
-                  <Trash2 size={18} />
-                </button>
-              </div>
-            </div>
-
-            <p className="text-gray-700 mt-3 text-sm leading-6">
-              Prepare React interview questions and
-              practice DSA daily.
-            </p>
-
-            <p className="text-xs text-gray-500 mt-6">
-              29 July 2026
-            </p>
-          </div>
-
-          {/* Card */}
-          <div className="bg-pink-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition">
-            <div className="flex justify-between items-start">
-              <h2 className="text-xl font-semibold">
-                Shopping
-              </h2>
-
-              <div className="flex gap-2">
-                <button className="text-blue-600 hover:text-blue-800">
-                  <Edit3 size={18} />
-                </button>
-
-                <button className="text-red-500 hover:text-red-700">
-                  <Trash2 size={18} />
-                </button>
-              </div>
-            </div>
-
-            <p className="text-gray-700 mt-3 text-sm leading-6">
-              Buy Laptop Stand, Mouse,
-              Keyboard and USB Hub.
-            </p>
-
-            <p className="text-xs text-gray-500 mt-6">
-              28 July 2026
-            </p>
-          </div>
-
-          {/* Card */}
-          <div className="bg-blue-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition">
-            <div className="flex justify-between items-start">
-              <h2 className="text-xl font-semibold">
-                Daily Goals
-              </h2>
-
-              <div className="flex gap-2">
-                <button className="text-blue-600 hover:text-blue-800">
-                  <Edit3 size={18} />
-                </button>
-
-                <button className="text-red-500 hover:text-red-700">
-                  <Trash2 size={18} />
-                </button>
-              </div>
-            </div>
-
-            <p className="text-gray-700 mt-3 text-sm leading-6">
-              Complete React Project,
-              Apply for Jobs,
-              Solve 2 LeetCode Problems.
-            </p>
-
-            <p className="text-xs text-gray-500 mt-6">
-              Today
-            </p>
-          </div>
+          
 
         </div>
       </div>
