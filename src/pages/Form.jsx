@@ -9,12 +9,12 @@ import { useEffect } from 'react';
 function Form() {
 
   const [getAllNotes,setGetAllNotes]=useState([])
-  const [editNote,setEditNote]=useState({
-    NoteTitle,
-    Category,
-    Note,
-    Tags
-  })
+  // const [editNote,setEditNote]=useState({
+  //   Category,
+  //   Note,
+  //   NoteTitle,
+  //   Tags
+  // })
 
   const handleGetAllNotes= async()=>{
 
@@ -32,7 +32,7 @@ function Form() {
   const handleEditNotes = async()=>{
 
     try {
-      const response = await axios.post('http://localhost:3000/api/updateNote',)
+      const response = await axios.post('http://localhost:3000/api/updateNote')
     } catch (error) {
       console.log(error)
     }
@@ -80,7 +80,7 @@ function Form() {
         </div>
 
         {/* Notes Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8 ">
 
           {/* Card */}
          
@@ -89,16 +89,21 @@ function Form() {
             getAllNotes.length>0?
             getAllNotes.map((item)=>(
 
-               <div key={item._id} className="bg-yellow-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition">
+               <div key={item._id} className="bg-yellow-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition overflow-y-scroll">
             <div className="flex justify-between items-start">
               <h2 className="text-xl font-semibold">
                {item.NoteTitle}
               </h2>
 
               <div className="flex gap-2">
-                <button className="text-blue-600 hover:text-blue-800">
+                <Link to={'/editNotes'}>
+
+                 <button className="text-blue-600 hover:text-blue-800">
                   <Edit3 size={18} />
                 </button>
+
+                </Link>
+               
 
                 <button className="text-red-500 hover:text-red-700">
                   <Trash2 size={18} />
