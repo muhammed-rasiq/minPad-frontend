@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function EditForm() {
+
+  const location = useLocation()
+
+   const note = location.state.note
+
+  const [formData, setFormData] = useState({
+  title: note.NoteTitle,
+  category: note.Category,
+  text: note.Note,
+  tags: note.Tags
+})
+
+ 
+  
+
   return (
     <>
     
@@ -33,6 +49,13 @@ function EditForm() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3
                      outline-none focus:ring-2 focus:ring-yellow-300
                      focus:border-yellow-400"
+                     value={note.NoteTitle }
+                      onChange={(e) =>
+    setFormData({
+      ...formData,
+      NoteTitle: e.target.value
+    })
+  }
         />
       </div>
 
@@ -48,6 +71,7 @@ function EditForm() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3
                      outline-none focus:ring-2 focus:ring-yellow-300
                      focus:border-yellow-400"
+                     value={note.Category}
         />
       </div>
 

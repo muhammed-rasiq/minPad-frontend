@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, Plus, Trash2, Edit3,  } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -13,9 +13,13 @@ function Form() {
   //   Category,
   //   Note,
   //   NoteTitle,
-  //   Tags
+  //   Tags,
+  //   id
   // })
 
+   const navigate = useNavigate()
+
+ 
   const handleGetAllNotes= async()=>{
 
     try {
@@ -28,6 +32,10 @@ function Form() {
 
 
   }
+
+
+
+
 
   const handleEditNotes = async()=>{
 
@@ -47,6 +55,8 @@ function Form() {
 
   return (
    <>
+
+   
 
   <div className="min-h-screen bg-slate-100 p-6">
       {/* Header */}
@@ -96,13 +106,18 @@ function Form() {
               </h2>
 
               <div className="flex gap-2">
-                <Link to={'/editNotes'}>
+                {/* <Link to={'/editNotes'}> */}
 
                  <button className="text-blue-600 hover:text-blue-800">
-                  <Edit3 size={18} />
+                  <Edit3 size={18}  onClick={() => navigate('/editNotes', {
+  state: {
+    note: item
+  }
+})}>
+  </Edit3> 
                 </button>
 
-                </Link>
+                {/* </Link> */}
                
 
                 <button className="text-red-500 hover:text-red-700">
