@@ -1,5 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function EditForm() {
 
@@ -8,11 +9,35 @@ function EditForm() {
    const note = location.state.note
 
   const [formData, setFormData] = useState({
-  title: note.NoteTitle,
-  category: note.Category,
-  text: note.Note,
-  tags: note.Tags
+  NoteTitle: note.NoteTitle,
+  Category: note.Category,
+  Note: note.Note,
+  Tags: note.Tags,
+  id: note._id,
 })
+
+//  const [editNote,setEditNote]=useState({
+//     Category,
+//     Note,
+//     NoteTitle,
+//     Tags,
+//     
+//   })
+
+const handleEdit = async()=>{
+  try {
+    const response = await axios.put('http://localhost:3000/api/updateNote',formData)
+    console.log(response)
+
+    if(response.status===201){
+      alert("Updated")
+      
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
 
  
   
@@ -49,7 +74,7 @@ function EditForm() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3
                      outline-none focus:ring-2 focus:ring-yellow-300
                      focus:border-yellow-400"
-                     value={note.NoteTitle }
+                     value={formData.NoteTitle }
                       onChange={(e) =>
     setFormData({
       ...formData,
@@ -71,7 +96,13 @@ function EditForm() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3
                      outline-none focus:ring-2 focus:ring-yellow-300
                      focus:border-yellow-400"
-                     value={note.Category}
+                     value={formData.Category}
+                     onChange={(e) =>
+    setFormData({
+      ...formData,
+      Category: e.target.value
+    })
+  }
         />
       </div>
 
@@ -88,6 +119,15 @@ function EditForm() {
                      outline-none resize-none
                      focus:ring-2 focus:ring-yellow-300
                      focus:border-yellow-400"
+                     value={formData.Note}
+                     onChange={(e) =>
+    setFormData({
+      ...formData,
+      Note: e.target.value
+    })
+  }
+                     
+                     
         ></textarea>
       </div>
 
@@ -103,23 +143,36 @@ function EditForm() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3
                      outline-none focus:ring-2 focus:ring-yellow-300
                      focus:border-yellow-400"
+                     value={formData.Tags}
+                         onChange={(e) =>
+    setFormData({
+      ...formData,
+      Tags: e.target.value
+    })
+  }
+                 
         />
       </div>
 
       {/* Buttons */}
       <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
 
-        <button
+        <Link to={'/'}>
+         <button
           className="px-6 py-3 rounded-xl border border-gray-00
                      text-white !bg-red-900"
         >
           Cancel
         </button>
+        </Link>
+
+       
 
         <button
           className="px-6 py-3 rounded-xl !bg-black
                      text-white font-medium
                     "
+                    onClick={handleEdit}
         >
           Update Note
         </button>

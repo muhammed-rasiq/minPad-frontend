@@ -9,13 +9,7 @@ import { useEffect } from 'react';
 function Form() {
 
   const [getAllNotes,setGetAllNotes]=useState([])
-  // const [editNote,setEditNote]=useState({
-  //   Category,
-  //   Note,
-  //   NoteTitle,
-  //   Tags,
-  //   id
-  // })
+ 
 
    const navigate = useNavigate()
 
