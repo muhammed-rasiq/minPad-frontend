@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 function AddNote() {
 
   const [addNotesData, setAddNotesData]=useState({
@@ -25,6 +26,13 @@ function AddNote() {
       addNotesData,
 )
 
+   if(response.status===201){
+    alert("note added")
+    setAddNotesData({ NoteTitle:"",
+    Category:"",
+    Note:"",
+    Tags:""})
+   }
 
     console.log(response.data)
       
@@ -129,13 +137,16 @@ function AddNote() {
 
           {/* Buttons */}
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-3">
-            <button
+            <Link to={'/'}>
+              <button
               type="button"
               className="px-5 py-3 rounded-xl border border-gray-300
               text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
             >
               Cancel
             </button>
+            </Link>
+          
 
             <button
               type="submit"

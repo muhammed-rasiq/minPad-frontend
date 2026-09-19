@@ -9,7 +9,9 @@ import { useEffect } from 'react';
 function Form() {
 
   const [getAllNotes,setGetAllNotes]=useState([])
+  const [search,setSearch]=useState('')
  
+  console.log(search)
 
    const navigate = useNavigate()
 
@@ -29,18 +31,22 @@ function Form() {
 
 
 
-
-
-  const handleEditNotes = async()=>{
-
+  const handleDeleteNote = async(id)=>{
     try {
-      const response = await axios.post('http://localhost:3000/api/updateNote')
+       const response = await axios.delete('http://localhost:3000/api/deleteNote',{data:{id}})
+       console.log(response)
+       if(response.status===200){
+        handleGetAllNotes()
+       }
     } catch (error) {
       console.log(error)
     }
 
-
   }
+
+
+
+  
 
   useEffect(()=>{
     
@@ -75,11 +81,14 @@ function Form() {
           <Search
             className="absolute left-4 top-3.5 text-gray-500"
             size={20}
+           
           />
           <input
             type="text"
             placeholder="Search notes..."
             className="w-full pl-12 pr-4 py-3 rounded-xl bg-white shadow-md outline-none border focus:border-blue-500"
+            value={search}
+             onChange={(e)=>setSearch(e.target.value)}
           />
         </div>
 
@@ -91,7 +100,12 @@ function Form() {
 
           {
             getAllNotes.length>0?
-            getAllNotes.map((item)=>(
+            getAllNotes
+            .filter((item) =>
+    item.NoteTitle.toLowerCase().includes(search.toLowerCase())
+  )
+            .map((item)=>(
+              
 
                <div key={item._id} className="bg-yellow-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition overflow-y-scroll">
             <div className="flex justify-between items-start">
@@ -114,8 +128,8 @@ function Form() {
                 {/* </Link> */}
                
 
-                <button className="text-red-500 hover:text-red-700">
-                  <Trash2 size={18} />
+                <button className="text-red-500 hover:text-red-700" onClick={()=>handleDeleteNote(item._id)}>
+                  <Trash2 size={18}  />
                 </button>
               </div>
             </div>
